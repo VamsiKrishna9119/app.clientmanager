@@ -79,7 +79,6 @@ export const AddInvoice = () => {
   const [errors, setErrors] = useState<any>();
   const [isRendered, setIsRendered] = useState(false);
   const [uploadFile, setUploadFile] = useState<any>();
-  const [multipleFilesData, setMultipleFilesData] = useState<any>();
   const [opendeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -636,6 +635,7 @@ export const AddInvoice = () => {
                         : invoiceDetails?.invoice_amount
                     }
                   />
+
                   {selectedServices?.length > 1 ? (
                     <Button
                       onClick={() => {
@@ -762,7 +762,6 @@ export const AddInvoice = () => {
             : "Add Invoice"}
         </Button>
       </div>
-      <p>{multipleFilesData ? multipleFilesData[0]?.name : ""}</p>
       <DeleteFileDialog
         opendeleteDialog={opendeleteDialog}
         handleCloseDialog={handleCloseDialog}

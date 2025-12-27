@@ -33,7 +33,6 @@ const Clients = () => {
     sort_by = params.get("sort_by") as string,
     sort_type = params.get("sort_type") as string,
   }: Partial<apiPropTypes>) => {
-    if (loading) return;
     try {
       setLoading(true);
       let queryParams: any = {
@@ -58,7 +57,6 @@ const Clients = () => {
       if (to_date) {
         queryParams["to_date"] = to_date;
       }
-      setLoading(true);
       let queryString = prepareURLEncodedParams("", queryParams);
       router.push(`${pathname}${queryString}`);
       const response = await getAllClientsListAPI(queryParams);

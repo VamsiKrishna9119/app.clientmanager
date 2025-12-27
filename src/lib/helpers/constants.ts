@@ -100,20 +100,22 @@ export const serviceTypeConstansts = [
 export const checkAmountInput = (event: any) => {
   let value = event.target.value;
 
-  // Replace anything that is not a number or decimal point
+  // Replace any character that is not a digit or a decimal point (but allow only one decimal)
   value = value.replace(/[^0-9.]/g, "");
 
-  // Ensure that there is only one decimal point in the value
+  // Ensure that there is only one decimal point
   const decimalIndex = value.indexOf(".");
 
   if (decimalIndex !== -1) {
-    // Allow up to 2 decimal places, and remove additional decimals if present
+    // Split the value into parts before and after the decimal point
     const beforeDecimal = value.slice(0, decimalIndex); // Digits before the decimal
-    const afterDecimal = value.slice(decimalIndex + 1).replace(/\./g, ""); // Remove extra decimal points
-    value = beforeDecimal + "." + afterDecimal.slice(0, 2); // Restrict to 2 decimal places
+    const afterDecimal = value.slice(decimalIndex + 1).replace(/[^0-9]/g, ""); // Ensure only numbers after decimal
+
+    // Reconstruct the value: limit to 2 decimal places
+    value = beforeDecimal + "." + afterDecimal.slice(0, 2);
   }
 
-  // Update the event target value
+  // Assign the cleaned-up value back to the input field
   event.target.value = value;
 };
 
